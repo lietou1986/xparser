@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{C70FB0DB-147E-44D6-9390-D6C71C02A9AE}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <OutputType>Library</OutputType>
+    <AssemblyName>Microsoft.Ccr.Core</AssemblyName>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <WarningLevel>4</WarningLevel>
+    <TargetFrameworkProfile />
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Platform)' == 'AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <HintPath>..\_References\System.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Microsoft.Ccr.Core.Arbiters\ArbiterTaskState.cs" />
+    <Compile Include="Microsoft.Ccr.Core.Arbiters\IArbiterTask.cs" />
+    <Compile Include="Microsoft.Ccr.Core.Arbiters\IPortArbiterAccess.cs" />
+    <Compile Include="Microsoft.Ccr.Core.Arbiters\IPortElement.cs" />
+    <Compile Include="Microsoft.Ccr.Core.Arbiters\PortElement.cs" />
+    <Compile Include="Microsoft.Ccr.Core.Arbiters\PortMode.cs" />
+    <Compile Include="Microsoft.Ccr.Core.Arbiters\PortSetMode.cs" />
+    <Compile Include="Microsoft.Ccr.Core.Arbiters\ReceiverTask.cs" />
+    <Compile Include="Microsoft.Ccr.Core.Arbiters\ReceiverTaskState.cs" />
+    <Compile Include="Microsoft.Ccr.Core\Arbiter.cs" />
+    <Compile Include="Microsoft.Ccr.Core\Causality.cs" />
+    <Compile Include="Microsoft.Ccr.Core\CausalityStack.cs" />
+    <Compile Include="Microsoft.Ccr.Core\CausalityThreadContext.cs" />
+    <Compile Include="Microsoft.Ccr.Core\CcrServiceBase.cs" />
+    <Compile Include="Microsoft.Ccr.Core\Choice.cs" />
+    <Compile Include="Microsoft.Ccr.Core\ConcurrentReceiverGroup.cs" />
+    <Compile Include="Microsoft.Ccr.Core\Dispatcher.cs" />
+    <Compile Include="Microsoft.Ccr.Core\DispatcherOptions.cs" />
+    <Compile Include="Microsoft.Ccr.Core\DispatcherQueue.cs" />
+    <Compile Include="Microsoft.Ccr.Core\DispatcherQueueExtensions.cs" />
+    <Compile Include="Microsoft.Ccr.Core\EmptyValue.cs" />
+    <Compile Include="Microsoft.Ccr.Core\ExclusiveReceiverGroup.cs" />
+    <Compile Include="Microsoft.Ccr.Core\GatherPrivateReceiver.cs" />
+    <Compile Include="Microsoft.Ccr.Core\Handler.cs" />
+    <Compile Include="Microsoft.Ccr.Core\ICausality.cs" />
+    <Compile Include="Microsoft.Ccr.Core\Interleave.cs" />
+    <Compile Include="Microsoft.Ccr.Core\InterleaveReceiverContext.cs" />
+    <Compile Include="Microsoft.Ccr.Core\InterleaveReceiverGroup.cs" />
+    <Compile Include="Microsoft.Ccr.Core\InterleaveReceivers.cs" />
+    <Compile Include="Microsoft.Ccr.Core\IPort.cs" />
+    <Compile Include="Microsoft.Ccr.Core\IPortReceive.cs" />
+    <Compile Include="Microsoft.Ccr.Core\IPortSet.cs" />
+    <Compile Include="Microsoft.Ccr.Core\ITask.cs" />
+    <Compile Include="Microsoft.Ccr.Core\IterativeTask.cs" />
+    <Compile Include="Microsoft.Ccr.Core\IteratorContext.cs" />
+    <Compile Include="Microsoft.Ccr.Core\IteratorHandler.cs" />
+    <Compile Include="Microsoft.Ccr.Core\JoinReceiver.cs" />
+    <Compile Include="Microsoft.Ccr.Core\JoinReceiverTask.cs" />
+    <Compile Include="Microsoft.Ccr.Core\JoinSinglePortReceiver.cs" />
+    <Compile Include="Microsoft.Ccr.Core\MultipleItemGather.cs" />
+    <Compile Include="Microsoft.Ccr.Core\MultipleItemHelperReceiver.cs" />
+    <Compile Include="Microsoft.Ccr.Core\MultipleItemReceiver.cs" />
+    <Compile Include="Microsoft.Ccr.Core\Port.cs" />
+    <Compile Include="Microsoft.Ccr.Core\PortExtensions.cs" />
+    <Compile Include="Microsoft.Ccr.Core\PortNotFoundException.cs" />
+    <Compile Include="Microsoft.Ccr.Core\PortSet.cs" />
+    <Compile Include="Microsoft.Ccr.Core\PortSetExtensions.cs" />
+    <Compile Include="Microsoft.Ccr.Core\Receiver.cs" />
+    <Compile Include="Microsoft.Ccr.Core\Resource1.cs" />
+    <Compile Include="Microsoft.Ccr.Core\Shutdown.cs" />
+    <Compile Include="Microsoft.Ccr.Core\Store.cs" />
+    <Compile Include="Microsoft.Ccr.Core\StoreBase.cs" />
+    <Compile Include="Microsoft.Ccr.Core\SuccessFailurePort.cs" />
+    <Compile Include="Microsoft.Ccr.Core\SuccessResult.cs" />
+    <Compile Include="Microsoft.Ccr.Core\Task.cs" />
+    <Compile Include="Microsoft.Ccr.Core\TaskCommon.cs" />
+    <Compile Include="Microsoft.Ccr.Core\TaskExecutionPolicy.cs" />
+    <Compile Include="Microsoft.Ccr.Core\TaskExecutionWorker.cs" />
+    <Compile Include="Microsoft.Ccr.Core\TeardownReceiverGroup.cs" />
+    <Compile Include="Microsoft.Ccr.Core\Tuple.cs" />
+    <Compile Include="Microsoft.Ccr.Core\VariableArgumentHandler.cs" />
+    <Compile Include="Microsoft.Ccr.Core\VariableArgumentTask.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Microsoft.Ccr.Core\Resource1.resx" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

@@ -1,0 +1,9 @@
+D:\WorkSpaces\search\X.ResumeParse-2.0\_Build\xbox\XParser\Data\fdata.db
+D:\WorkSpaces\search\X.ResumeParse-2.0\_Build\xbox\XParser\Data\rdata.db
+D:\WorkSpaces\search\X.ResumeParse-2.0\_Build\xbox\XParser\log4net.config
+D:\WorkSpaces\search\X.ResumeParse-2.0\_Build\xbox\XParser\XParserService.exe.config
+D:\WorkSpaces\search\X.ResumeParse-2.0\_Build\xbox\XParser\XParserService.exe
+D:\WorkSpaces\search\X.ResumeParse-2.0\_Build\xbox\XParser\XParserService.pdb
+D:\WorkSpaces\search\X.ResumeParse-2.0\X.ResumeParseService.Host.Topshelf\obj\Debug\X.ResumeParseService.Host.Topshelf.csprojResolveAssemblyReference.cache
+D:\WorkSpaces\search\X.ResumeParse-2.0\X.ResumeParseService.Host.Topshelf\obj\Debug\XParserService.exe
+D:\WorkSpaces\search\X.ResumeParse-2.0\X.ResumeParseService.Host.Topshelf\obj\Debug\XParserService.pdb

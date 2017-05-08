@@ -1,0 +1,16 @@
+D:\WorkSpaces\search\X.ResumeParse-2.0\Dorado\bin\Debug\Dorado.dll
+D:\WorkSpaces\search\X.ResumeParse-2.0\Dorado\bin\Debug\Dorado.pdb
+D:\WorkSpaces\search\X.ResumeParse-2.0\Dorado\bin\Debug\EffiProz.dll
+D:\WorkSpaces\search\X.ResumeParse-2.0\Dorado\bin\Debug\log4net.dll
+D:\WorkSpaces\search\X.ResumeParse-2.0\Dorado\bin\Debug\Microsoft.Ccr.Core.dll
+D:\WorkSpaces\search\X.ResumeParse-2.0\Dorado\bin\Debug\Newtonsoft.Json.dll
+D:\WorkSpaces\search\X.ResumeParse-2.0\Dorado\bin\Debug\System.Core.dll
+D:\WorkSpaces\search\X.ResumeParse-2.0\Dorado\bin\Debug\System.Data.SQLite.dll
+D:\WorkSpaces\search\X.ResumeParse-2.0\Dorado\bin\Debug\Microsoft.Ccr.Core.pdb
+D:\WorkSpaces\search\X.ResumeParse-2.0\Dorado\bin\Debug\log4net.xml
+D:\WorkSpaces\search\X.ResumeParse-2.0\Dorado\bin\Debug\Newtonsoft.Json.xml
+D:\WorkSpaces\search\X.ResumeParse-2.0\Dorado\bin\Debug\System.Data.SQLite.xml
+D:\WorkSpaces\search\X.ResumeParse-2.0\Dorado\bin\Debug\System.Data.SQLite.dll.config
+D:\WorkSpaces\search\X.ResumeParse-2.0\Dorado\obj\Debug\Dorado.csprojResolveAssemblyReference.cache
+D:\WorkSpaces\search\X.ResumeParse-2.0\Dorado\obj\Debug\Dorado.dll
+D:\WorkSpaces\search\X.ResumeParse-2.0\Dorado\obj\Debug\Dorado.pdb

@@ -1,0 +1,17 @@
+D:\WorkSpaces\search\X.ResumeParse-2.0\X.ResumeParseService.Contract\bin\Debug\X.ResumeParseService.Contract.dll
+D:\WorkSpaces\search\X.ResumeParse-2.0\X.ResumeParseService.Contract\bin\Debug\X.ResumeParseService.Contract.pdb
+D:\WorkSpaces\search\X.ResumeParse-2.0\X.ResumeParseService.Contract\bin\Debug\Dorado.dll
+D:\WorkSpaces\search\X.ResumeParse-2.0\X.ResumeParseService.Contract\bin\Debug\Newtonsoft.Json.dll
+D:\WorkSpaces\search\X.ResumeParse-2.0\X.ResumeParseService.Contract\bin\Debug\System.Core.dll
+D:\WorkSpaces\search\X.ResumeParse-2.0\X.ResumeParseService.Contract\bin\Debug\X.DocumentExtractService.Contract.dll
+D:\WorkSpaces\search\X.ResumeParse-2.0\X.ResumeParseService.Contract\bin\Debug\Microsoft.Ccr.Core.dll
+D:\WorkSpaces\search\X.ResumeParse-2.0\X.ResumeParseService.Contract\bin\Debug\EffiProz.dll
+D:\WorkSpaces\search\X.ResumeParse-2.0\X.ResumeParseService.Contract\bin\Debug\log4net.dll
+D:\WorkSpaces\search\X.ResumeParse-2.0\X.ResumeParseService.Contract\bin\Debug\Dorado.pdb
+D:\WorkSpaces\search\X.ResumeParse-2.0\X.ResumeParseService.Contract\bin\Debug\X.DocumentExtractService.Contract.pdb
+D:\WorkSpaces\search\X.ResumeParse-2.0\X.ResumeParseService.Contract\bin\Debug\Newtonsoft.Json.xml
+D:\WorkSpaces\search\X.ResumeParse-2.0\X.ResumeParseService.Contract\bin\Debug\Microsoft.Ccr.Core.pdb
+D:\WorkSpaces\search\X.ResumeParse-2.0\X.ResumeParseService.Contract\bin\Debug\log4net.xml
+D:\WorkSpaces\search\X.ResumeParse-2.0\X.ResumeParseService.Contract\obj\Debug\X.ResumeParseService.Contract.csprojResolveAssemblyReference.cache
+D:\WorkSpaces\search\X.ResumeParse-2.0\X.ResumeParseService.Contract\obj\Debug\X.ResumeParseService.Contract.dll
+D:\WorkSpaces\search\X.ResumeParse-2.0\X.ResumeParseService.Contract\obj\Debug\X.ResumeParseService.Contract.pdb

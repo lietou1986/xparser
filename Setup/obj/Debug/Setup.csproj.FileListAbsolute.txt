@@ -1,0 +1,9 @@
+D:\WorkSpaces\search\X.ResumeParse\Setup\bin\Debug\Setup.exe
+D:\WorkSpaces\search\X.ResumeParse\Setup\bin\Debug\Setup.pdb
+D:\WorkSpaces\search\X.ResumeParse\Setup\obj\Debug\Setup.csprojResolveAssemblyReference.cache
+D:\WorkSpaces\search\X.ResumeParse\Setup\obj\Debug\Setup.exe
+D:\WorkSpaces\search\X.ResumeParse\Setup\obj\Debug\Setup.pdb
+D:\WorkSpaces\search\X.ResumeParse-2.0\Setup\bin\Debug\Setup.exe
+D:\WorkSpaces\search\X.ResumeParse-2.0\Setup\bin\Debug\Setup.pdb
+D:\WorkSpaces\search\X.ResumeParse-2.0\Setup\obj\Debug\Setup.exe
+D:\WorkSpaces\search\X.ResumeParse-2.0\Setup\obj\Debug\Setup.pdb

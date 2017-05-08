@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{3429804C-C345-4CD9-A3E2-3610BA9DFBA1}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>X.ResumeParseService.Scanner</RootNamespace>
+    <AssemblyName>X.ResumeParseService.Scanner</AssemblyName>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Enums\ExcludeSpecialFolder.cs" />
+    <Compile Include="Enums\IncludeSpecialFolder.cs" />
+    <Compile Include="FileActivity.cs" />
+    <Compile Include="FileScanner.cs" />
+    <Compile Include="ResumeParser.cs" />
+    <Compile Include="ResumeFileScanner.cs" />
+    <Compile Include="SafeSQLite.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Data\fdata.db">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Data\rdata.db">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core">
+      <HintPath>..\_References\System.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.SQLite, Version=1.0.105.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\System.Data.SQLite.Core.1.0.105.0\lib\net20\System.Data.SQLite.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.XML" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Dorado\Dorado.csproj">
+      <Project>{4cf556a4-45fb-46ce-a6bb-e9e7dc8f93ce}</Project>
+      <Name>Dorado</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\X.DocumentExtractService.Contract\X.DocumentExtractService.Contract.csproj">
+      <Project>{766fd3e3-2bdf-4db8-ad9c-df4f92c48a48}</Project>
+      <Name>X.DocumentExtractService.Contract</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\X.DocumentExtractService\X.DocumentExtractService.csproj">
+      <Project>{d3983497-82b3-462f-895e-f59027855b74}</Project>
+      <Name>X.DocumentExtractService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\X.ResumeParseService.Contract\X.ResumeParseService.Contract.csproj">
+      <Project>{6630a376-f564-42b5-a094-b72760212b6f}</Project>
+      <Name>X.ResumeParseService.Contract</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\X.ResumeParseService\X.ResumeParseService.csproj">
+      <Project>{f0d8df59-b6b3-4aaa-a59e-07d88806f0eb}</Project>
+      <Name>X.ResumeParseService</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{4CF556A4-45FB-46CE-A6BB-E9E7DC8F93CE}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Dorado</RootNamespace>
+    <AssemblyName>Dorado</AssemblyName>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="CoreException.cs" />
+    <Compile Include="Core\FileWatcher.cs" />
+    <Compile Include="Core\RwLocker.cs" />
+    <Compile Include="Core\Threading\AsyncResultNoReturn.cs" />
+    <Compile Include="Core\Threading\ConcurrentRandom.cs" />
+    <Compile Include="Core\Threading\CountdownTimer.cs" />
+    <Compile Include="Extensions\EnumerableExtensions.cs" />
+    <Compile Include="Extensions\StreamExtensions.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="Guard.cs" />
+    <Compile Include="Core\LoggerWrapper.cs" />
+    <Compile Include="OperateResult.cs" />
+    <Compile Include="OperateStatus.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Queue\DispatcherFactory.cs" />
+    <Compile Include="Queue\Generic\Priority.cs" />
+    <Compile Include="Queue\Generic\QueueProcessor.cs" />
+    <Compile Include="Queue\Generic\TaskExecutionQueuePolicy.cs" />
+    <Compile Include="Queue\Generic\TaskExecutionSchedulingPolicy.cs" />
+    <Compile Include="Queue\IQueueProcessable.cs" />
+    <Compile Include="Queue\IReportable.cs" />
+    <Compile Include="Queue\Persistence\EfzQueuePersistence.cs" />
+    <Compile Include="Queue\Persistence\PersistentQueueConfig.cs" />
+    <Compile Include="Queue\Persistence\PersistentQueueItem.cs" />
+    <Compile Include="Queue\Persistence\PersistentQueueProcessor.cs" />
+    <Compile Include="Queue\Persistence\QueuePersistence.cs" />
+    <Compile Include="Queue\QueueException.cs" />
+    <Compile Include="Queue\QueueProcessable.cs" />
+    <Compile Include="Queue\QueueProcessDelegate.cs" />
+    <Compile Include="Queue\ReportableObjectDirectory.cs" />
+    <Compile Include="SystemInfo\CPUInfo.cs" />
+    <Compile Include="SystemInfo\MemoryInfo.cs" />
+    <Compile Include="SystemInfo\SystemInfo.cs" />
+    <Compile Include="SystemInfo\SystemTimeInfo .cs" />
+    <Compile Include="Utils\ConfigUtility.cs" />
+    <Compile Include="Utils\IOUtility.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="EffiProz">
+      <HintPath>..\_References\EffiProz.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\packages\log4net.2.0.8\lib\net20-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.2\lib\net20\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core">
+      <HintPath>..\_References\System.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.SQLite">
+      <HintPath>..\packages\System.Data.SQLite.Core.1.0.105.0\lib\net20\System.Data.SQLite.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.XML" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Microsoft.Ccr.Core\Microsoft.Ccr.Core.csproj">
+      <Project>{c70fb0db-147e-44d6-9390-d6c71c02a9ae}</Project>
+      <Name>Microsoft.Ccr.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

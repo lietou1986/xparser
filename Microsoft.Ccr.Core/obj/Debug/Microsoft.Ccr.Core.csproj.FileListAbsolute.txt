@@ -1,0 +1,7 @@
+D:\WorkSpaces\search\X.ResumeParse-2.0\Microsoft.Ccr.Core\bin\Debug\Microsoft.Ccr.Core.dll
+D:\WorkSpaces\search\X.ResumeParse-2.0\Microsoft.Ccr.Core\bin\Debug\Microsoft.Ccr.Core.pdb
+D:\WorkSpaces\search\X.ResumeParse-2.0\Microsoft.Ccr.Core\bin\Debug\System.Core.dll
+D:\WorkSpaces\search\X.ResumeParse-2.0\Microsoft.Ccr.Core\obj\Debug\Microsoft.Ccr.Core.Resource1.resources
+D:\WorkSpaces\search\X.ResumeParse-2.0\Microsoft.Ccr.Core\obj\Debug\Microsoft.Ccr.Core.csproj.GenerateResource.Cache
+D:\WorkSpaces\search\X.ResumeParse-2.0\Microsoft.Ccr.Core\obj\Debug\Microsoft.Ccr.Core.dll
+D:\WorkSpaces\search\X.ResumeParse-2.0\Microsoft.Ccr.Core\obj\Debug\Microsoft.Ccr.Core.pdb
