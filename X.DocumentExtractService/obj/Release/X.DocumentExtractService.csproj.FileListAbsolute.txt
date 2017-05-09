@@ -18,3 +18,6 @@ D:\WorkSpaces\search\X.ResumeParser-2.0\X.DocumentExtractService\bin\Release\ite
 D:\WorkSpaces\search\X.ResumeParser-2.0\X.DocumentExtractService\bin\Release\Microsoft.Ccr.Core.pdb
 D:\WorkSpaces\search\X.ResumeParser-2.0\X.DocumentExtractService\bin\Release\Newtonsoft.Json.xml
 D:\WorkSpaces\search\X.ResumeParser-2.0\X.DocumentExtractService\bin\Release\log4net.xml
+D:\Projects\X.ResumeParser-2.0\_Build\DocumentExtractService\X.DocumentExtractService.dll
+D:\Projects\X.ResumeParser-2.0\X.DocumentExtractService\obj\Release\X.DocumentExtractService.csprojResolveAssemblyReference.cache
+D:\Projects\X.ResumeParser-2.0\X.DocumentExtractService\obj\Release\X.DocumentExtractService.dll

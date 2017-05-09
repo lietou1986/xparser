@@ -12,10 +12,10 @@ using System.ServiceProcess;
 using System.Threading;
 using System.Windows.Forms;
 using X.DocumentExtractService.Contract.Models;
-using X.ResumeParseService.Scanner;
 using X.ResumeParseService;
 using X.ResumeParseService.Configuration;
 using X.ResumeParseService.Contract;
+using X.ResumeParseService.Scanner;
 
 namespace UI
 {
@@ -80,6 +80,27 @@ namespace UI
             });
         }
 
+        private bool IsServiceRunning
+        {
+            get
+            {
+                var service = GetService();
+                if (service == null) return false;
+                return service.Status == ServiceControllerStatus.Running;
+            }
+        }
+
+        private ServiceController GetService()
+        {
+            var serviceControllers = ServiceController.GetServices();
+            var service = serviceControllers.FirstOrDefault(n => n.ServiceName == ServiceName);
+            if (service != null)
+            {
+                return service;
+            }
+            return null;
+        }
+
         /// <summary>
         /// 打印服务状态
         /// </summary>
@@ -89,8 +110,8 @@ namespace UI
             {
                 while (true)
                 {
-                    var serviceControllers = ServiceController.GetServices();
-                    var service = serviceControllers.FirstOrDefault(n => n.ServiceName == ServiceName);
+                    var service = GetService();
+
                     if (service != null)
                     {
                         UpdateUI(() =>
@@ -145,6 +166,7 @@ namespace UI
                 ResourcesConfig.Load();
 
                 Notice("资源加载完成");
+
                 UpdateUI(() =>
                 {
                     btnDocExt.Enabled = true;
@@ -264,6 +286,11 @@ namespace UI
 
         private void btnScan_Click(object sender, EventArgs e)
         {
+            if (IsServiceRunning)
+            {
+                MessageBox.Show("已有后台服务在运行，请先停止服务！");
+                return;
+            }
             List<string> directorys = new List<string>();
             DialogResult select = MessageBox.Show("要执行全盘扫描吗?", "扫描确认", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (select == DialogResult.Yes)
