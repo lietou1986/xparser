@@ -404,7 +404,7 @@ namespace UI
                 if (activity.IsChanged)
                     Alert(string.Format("文件发生变化->{0}", activity.FilePath));
                 if (!activity.IsValid)
-                    Alert(string.Format("文件无效->{0}", activity.FilePath));
+                    Alert(string.Format("文件无效->{0} {1}", activity.Message, activity.FilePath));
             });
         }
 

@@ -46,5 +46,18 @@ namespace X.ResumeParseService.Contract.Models
         {
             return JsonConvert.SerializeObject(this);
         }
+
+        /// <summary>
+        /// 判断简历是否有效
+        /// </summary>
+        /// <returns></returns>
+        public bool IsValid()
+        {
+            if (string.IsNullOrEmpty(Name)) return false;
+            if (string.IsNullOrEmpty(Phone) && string.IsNullOrEmpty(Email)) return false;
+            if (EducationExperience == null || EducationExperience.Count == 0) return false;
+            if (WorkExperience == null || WorkExperience.Count == 0) return false;
+            return true;
+        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using System.Globalization;
+using System.Web.Security;
 
 namespace Dorado.Extensions
 {
@@ -70,6 +71,15 @@ namespace Dorado.Extensions
         {
             //abc
             return value.Substring(startIndex);
+        }
+
+        public static string MD5(this string str)
+        {
+            if (!string.IsNullOrEmpty(str))
+            {
+                return FormsAuthentication.HashPasswordForStoringInConfigFile(str, "MD5");
+            }
+            return str;
         }
     }
 }

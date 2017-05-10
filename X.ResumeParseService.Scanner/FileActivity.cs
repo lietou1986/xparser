@@ -13,6 +13,7 @@
             IsChanged = isChanged;
         }
 
+        public string HashCode { get; set; }
         public string FilePath { get; set; }
         public bool IsChanged { get; set; }
         public bool IsValid { get; set; }

@@ -6,9 +6,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using X.DocumentExtractService.Contract.Models;
-using X.ResumeParseService.Scanner.Enums;
 using X.ResumeParseService.Contract;
 using X.ResumeParseService.Contract.Models;
+using X.ResumeParseService.Scanner.Enums;
 
 namespace X.ResumeParseService.Scanner
 {
@@ -19,7 +19,7 @@ namespace X.ResumeParseService.Scanner
     {
         private static string DateFormat = "yyyy-MM-dd HH:mm:ss";
         private static string Filter;
-        private static int MaxLength = 5;//5M
+        private static int MaxSize = 3;//3M
         private static List<string> ExcludeSpecialFolderList = new List<string>();
         private static List<string> IncludeSpecialFolderList = new List<string>();
         private static string InsertFileSql = "INSERT INTO [file]([path],[md5],[timestamp],[addtime],[edittime],[guid])VALUES('{0}','{1}','{2}','{3}','{3}','{4}');";
@@ -56,9 +56,10 @@ namespace X.ResumeParseService.Scanner
                 {
                 }
             }
-            ExcludeSpecialFolderList.Add(@"inetpub\");
-            ExcludeSpecialFolderList.Add(@"input\");
-            ExcludeSpecialFolderList.Add(@"users\");
+            ExcludeSpecialFolderList.Add(@"windows");
+            ExcludeSpecialFolderList.Add(@"inetpub");
+            ExcludeSpecialFolderList.Add(@"input");
+            ExcludeSpecialFolderList.Add(@"users");
             ExcludeSpecialFolderList.Add(@"program files");
 
             //包含的系统目录
@@ -96,10 +97,14 @@ namespace X.ResumeParseService.Scanner
         /// <returns></returns>
         protected override bool HandleActivity(FileActivity activity)
         {
+            activity.HashCode = activity.FilePath.MD5();
+
+            RecordFileInfo(activity);
+
             var result = _service.Parse(activity.FilePath, new ExtractOption[] { ExtractOption.Text });
             if (result.Status == OperateStatus.Success)
             {
-                RecordInfo(activity, result.Data);
+                RecordResumeInfo(activity, result.Data);
 
                 WatchFile(activity);
             }
@@ -118,23 +123,41 @@ namespace X.ResumeParseService.Scanner
         {
             FileInfo fileInfo = new FileInfo(activity.FilePath);
             if (!fileInfo.Exists)
+            {
+                activity.Message = "文件不存在";
                 return false;
+            }
             if ((fileInfo.Attributes & FileAttributes.Hidden) == FileAttributes.Hidden)
+            {
+                activity.Message = "隐藏文件不参与扫描";
                 return false;
+            }
 
             if (Filter.IndexOf(fileInfo.Extension.ToLower()) < 0)
+            {
+                activity.Message = "不支持此扩展名的文件";
                 return false;
-            if (fileInfo.Length > MaxLength * 1024 * 1024)
+            }
+            if (fileInfo.Length > MaxSize * 1024 * 1024)
+            {
+                activity.Message = string.Format("不支持大于[{0}ｍ]的文件", MaxSize);
                 return false;
+            }
 
             //判断文件是否变化，没有变化不处理
             if (!FileChanged(activity))
+            {
+                activity.Message = "文件内容未发生变化";
                 return false;
+            }
 
             //检验是否为简历
             var result = _service.Predict(activity.FilePath, new ExtractOption[] { ExtractOption.Text });
             if (result.Status == OperateStatus.Failure || !result.Data.IsResume)
+            {
+                activity.Message = result.Description;
                 return false;
+            }
 
             return true;
         }
@@ -175,36 +198,34 @@ namespace X.ResumeParseService.Scanner
         }
 
         /// <summary>
-        ///数据库写入(data/data.sqllite)
+        ///记录简历信息(data/data.sqllite)
         /// </summary>
-        private void RecordInfo(FileActivity activity, ResumeResult resume)
+        private void RecordResumeInfo(FileActivity activity, ResumeResult resume)
         {
-            ResumeData resumeData = resume.ResumeInfo;
-
-            string guid = string.Empty;
-
             if (activity.IsChanged)
             {
-                var result = _fConn.ExecuteScalar(string.Format("select guid from file nolock where path='{0}'", activity.FilePath));
-                if (result != null)
-                {
-                    guid = result.ToString();
-                    _fConn.ExecuteScalar(string.Format("delete from file where guid='{0}'", guid));
-                    _rConn.ExecuteScalar(string.Format("delete from resumelist where guid='{0}';delete from resumedetaillist where guid='{0}';", guid));
-                }
-            }
-            if (guid.IsNullOrWhiteSpace())
-            {
-                guid = Guid.NewGuid().ToString();
+                _rConn.ExecuteScalar(string.Format("delete from resumelist where guid='{0}';delete from resumedetaillist where guid='{0}';", activity.HashCode));
             }
 
             DateTime dateTime = DateTime.Now;
+
+            ResumeData resumeData = resume.ResumeInfo;
+
+            //记录简历信息
+            _rConn.ExecuteNonQuery(string.Format(InsertResumeSql, activity.HashCode, resumeData.Name, resumeData.Age, resumeData.Gender, resumeData.Phone, resumeData.Email, resumeData.JobTarget == null ? string.Empty : resumeData.JobTarget.JobCareer, resumeData.LatestDegree, resumeData.JobTarget == null ? string.Empty : resumeData.JobTarget.JobCareer, resumeData.Residence, activity.FilePath, "本地计算机", resumeData.WorkYears, dateTime.ToString(DateFormat), dateTime.ToUniversalTime(), Dorado.SystemInfo.SystemInfo.GetMacAddress(), resume.Text));
+        }
+
+        private void RecordFileInfo(FileActivity activity)
+        {
+            if (activity.IsChanged)
+            {
+                _fConn.ExecuteScalar(string.Format("delete from file where guid='{0}'", activity.HashCode));
+            }
+
             FileInfo fileInfo = new FileInfo(activity.FilePath);
 
             //记录文件信息
-            _fConn.ExecuteNonQuery(string.Format(InsertFileSql, fileInfo.FullName.ToLower(), activity.Md5, fileInfo.LastWriteTime.ToString(DateFormat), dateTime.ToString(DateFormat), guid));
-            //记录简历信息
-            _rConn.ExecuteNonQuery(string.Format(InsertResumeSql, guid, resumeData.Name, resumeData.Age, resumeData.Gender, resumeData.Phone, resumeData.Email, resumeData.JobTarget == null ? string.Empty : resumeData.JobTarget.JobCareer, resumeData.LatestDegree, resumeData.JobTarget == null ? string.Empty : resumeData.JobTarget.JobCareer, resumeData.Residence, activity.FilePath, "本地计算机", resumeData.WorkYears, dateTime.ToString(DateFormat), dateTime.ToUniversalTime(), Dorado.SystemInfo.SystemInfo.GetMacAddress(), resume.Text));
+            _fConn.ExecuteNonQuery(string.Format(InsertFileSql, fileInfo.FullName.ToLower(), activity.Md5, fileInfo.LastWriteTime.ToString(DateFormat), DateTime.Now.ToString(DateFormat), activity.HashCode));
         }
 
         /// <summary>

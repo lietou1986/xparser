@@ -24,16 +24,19 @@ namespace X.ResumeParseService
                 ResumeResult resumeResult = new ResumeResult
                 {
                     Text = predictResult.Data.Text,
-                    IsResume = predictResult.Data.IsResume,
                     Score = predictResult.Data.Score
                 };
 
-                if (!resumeResult.IsResume)
+                if (!predictResult.Data.IsResume)
                     return new OperateResult<ResumeResult>(OperateStatus.Failure, string.Format("不是有效的简历格式,得分[{0}]", predictResult.Data.Score), resumeResult);
 
                 //文本简历解析
                 TextCVParser parser = new TextCVParser(predictResult.Data.Text);
                 ResumeData resumeData = parser.Parse();
+                if (!resumeData.IsValid())
+                    return new OperateResult<ResumeResult>(OperateStatus.Failure, "不是有效的简历格式,缺少简历必要信息", resumeResult);
+
+                resumeResult.IsResume = true;
                 resumeResult.ResumeInfo = resumeData;
                 return new OperateResult<ResumeResult>(OperateStatus.Success, "操作成功", resumeResult);
             }
@@ -57,16 +60,19 @@ namespace X.ResumeParseService
                 ResumeResult resumeResult = new ResumeResult
                 {
                     Text = predictResult.Data.Text,
-                    IsResume = predictResult.Data.IsResume,
                     Score = predictResult.Data.Score
                 };
 
-                if (!resumeResult.IsResume)
+                if (!predictResult.Data.IsResume)
                     return new OperateResult<ResumeResult>(OperateStatus.Failure, string.Format("不是有效的简历格式,得分[{0}]", predictResult.Data.Score), resumeResult);
 
                 //文本简历解析
                 TextCVParser parser = new TextCVParser(predictResult.Data.Text);
                 ResumeData resumeData = parser.Parse();
+                if (!resumeData.IsValid())
+                    return new OperateResult<ResumeResult>(OperateStatus.Failure, "不是有效的简历格式,缺少简历必要信息", resumeResult);
+
+                resumeResult.IsResume = true;
                 resumeResult.ResumeInfo = resumeData;
                 return new OperateResult<ResumeResult>(OperateStatus.Success, "操作成功", resumeResult);
             }
@@ -92,6 +98,8 @@ namespace X.ResumeParseService
                 };
                 resumePredictResult.IsResume = resumePredictResult.Score >= 60;
                 operateResult.Data = resumePredictResult;
+                if (!resumePredictResult.IsResume)
+                    operateResult.Description = string.Format("不是有效的简历格式,得分[{0}]", resumePredictResult.Score);
             }
             else
             {
