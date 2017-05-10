@@ -7,8 +7,8 @@ using System.IO;
 using System.Linq;
 using X.DocumentExtractService.Contract.Models;
 using X.ResumeParseService.Contract;
-using X.ResumeParseService.Contract.Models;
 using X.ResumeParseService.Scanner.Enums;
+using X.ResumeParseService.Scanner.Storages;
 
 namespace X.ResumeParseService.Scanner
 {
@@ -24,13 +24,10 @@ namespace X.ResumeParseService.Scanner
         private static List<string> IncludeSpecialFolderList = new List<string>();
         private static string InsertFileSql = "INSERT INTO [file]([path],[md5],[timestamp],[addtime],[edittime],[guid])VALUES('{0}','{1}','{2}','{3}','{3}','{4}');";
 
-        private static string InsertResumeSql = "INSERT INTO [ResumeList]([Guid],[UserName],[Age],[Sex],[Phone],[Email],[ResumeName],[Education],[Position],[Address],[Url],[Source],[WorkYear],[LastChangeTime],[TimeStamp],[Mac])" +
-            "VALUES('{0}','{1}','{2}','{3}','{4}','{5}','{6}','{7}','{8}','{9}','{10}','{11}','{12}','{13}','{14}','{15}');INSERT INTO [ResumeDetailList]([Guid],[ResumeText],[TimeStamp])VALUES('{0}','{15}','{14}');";
-
         private bool _inited;
         private IResumeParseService _service;
         private SafeSQLite _fConn, _rConn;
-
+        private AbsStorage _storage;
         private Action<FileActivity, OperateResult<ResumeResult>> _handleCallback;
         private Action<FileActivity> _enqueueCallback;
         private Action _handleOverCallback, _scanOverCallback;
@@ -104,7 +101,7 @@ namespace X.ResumeParseService.Scanner
             var result = _service.Parse(activity.FilePath, new ExtractOption[] { ExtractOption.Text });
             if (result.Status == OperateStatus.Success)
             {
-                RecordResumeInfo(activity, result.Data);
+                _storage.Save(activity, result.Data);
 
                 WatchFile(activity);
             }
@@ -197,24 +194,6 @@ namespace X.ResumeParseService.Scanner
             _scanOverCallback();
         }
 
-        /// <summary>
-        ///记录简历信息(data/data.sqllite)
-        /// </summary>
-        private void RecordResumeInfo(FileActivity activity, ResumeResult resume)
-        {
-            if (activity.IsChanged)
-            {
-                _rConn.ExecuteScalar(string.Format("delete from resumelist where guid='{0}';delete from resumedetaillist where guid='{0}';", activity.HashCode));
-            }
-
-            DateTime dateTime = DateTime.Now;
-
-            ResumeData resumeData = resume.ResumeInfo;
-
-            //记录简历信息
-            _rConn.ExecuteNonQuery(string.Format(InsertResumeSql, activity.HashCode, resumeData.Name, resumeData.Age, resumeData.Gender, resumeData.Phone, resumeData.Email, resumeData.JobTarget == null ? string.Empty : resumeData.JobTarget.JobCareer, resumeData.LatestDegree, resumeData.JobTarget == null ? string.Empty : resumeData.JobTarget.JobCareer, resumeData.Residence, activity.FilePath, "本地计算机", resumeData.WorkYears, dateTime.ToString(DateFormat), dateTime.ToUniversalTime(), Dorado.SystemInfo.SystemInfo.GetMacAddress(), resume.Text));
-        }
-
         private void RecordFileInfo(FileActivity activity)
         {
             if (activity.IsChanged)
@@ -253,8 +232,10 @@ namespace X.ResumeParseService.Scanner
             DirectoryInfo baseDirectory = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory);
 
             _service = new ResumeParseService();
+
             _fConn = new SafeSQLite(string.Format("Data Source={0}", AppDomain.CurrentDomain.BaseDirectory + "data\\fdata.db"), true);
             _rConn = new SafeSQLite(string.Format("Data Source={0}", baseDirectory.Parent.FullName + "\\data\\rdata.db"), true);
+            _storage = new LocalStorage(_rConn);
             _inited = true;
         }
     }

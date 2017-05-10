@@ -47,6 +47,9 @@
     <Compile Include="ResumeParser.cs" />
     <Compile Include="ResumeFileScanner.cs" />
     <Compile Include="SafeSQLite.cs" />
+    <Compile Include="Storages\AbsStorage.cs" />
+    <Compile Include="Storages\RemoteStorage.cs" />
+    <Compile Include="Storages\LocalStorage.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Data\fdata.db">
